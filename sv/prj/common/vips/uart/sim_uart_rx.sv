@@ -67,7 +67,7 @@ begin: main_proc
             $display("UART log path is not set!\nUsing default log file:");
             log_path = $sformatf({DEFAULT_LOG_PATH, "_%1d.log"}, p_inst_num);
             $display("%s", log_path);
-            $stop;
+            //$stop;
         end
 
     log_path = $sformatf({log_path, "_%1d.log"}, p_inst_num);

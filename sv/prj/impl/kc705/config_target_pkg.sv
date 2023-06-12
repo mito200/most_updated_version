@@ -39,7 +39,7 @@ localparam int CFG_L2_LOG2_LINES_PER_WAY = 9;               // 7=16KB; 8=32KB; 9
 localparam int CFG_BOOTROM_LOG2_SIZE = 16;                  // 16=64 KB (default); 17=128KB; ..
 
 // Project relative HEX-file name to init boot ROM without .hex extension:
-localparam string CFG_BOOTROM_FILE_HEX = "../../../../examples/bootrom_tests/linuxbuild/bin/bootrom_tests";
+localparam string CFG_BOOTROM_FILE_HEX = "/home/megmar00/Desktop/riscv_vhdl_old/sv_without_makefile/Bachelor_thesis_repo/MyHelloWorld/bin/MyHelloWorld";
 
 // Internal SRAM block:
 //     - Increase memory map if need > 2MB FU740

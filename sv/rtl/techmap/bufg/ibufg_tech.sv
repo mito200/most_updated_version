@@ -2,7 +2,7 @@
 //! @author     Sergey Khabarov
 //! @brief      Virtual clock buffered output.
 //----------------------------------------------------------------------------
-
+`define TARGET_KC705
 module ibufg_tech (
     output logic o,
     input i

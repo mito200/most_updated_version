@@ -2,7 +2,7 @@
 //! @author     Sergey Khabarov
 //! @brief      Virtual Gigabits buffer with the differential signals.
 //--------------------------------------------------------------------------
-
+`define TARGET_KC705
 module igdsbuf_tech (
     input gclk_p,
     input gclk_n,

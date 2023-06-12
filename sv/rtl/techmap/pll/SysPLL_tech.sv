@@ -6,6 +6,7 @@
 //! @brief   SysPLL_tech entity declaration ("Virtual" PLL).
 //! @details This module instantiates the certain PLL implementation
 //!          depending generic technology argument.
+`define TARGET_KC705
 module SysPLL_tech (
   //! Reset value. Active high.
   input         i_reset,

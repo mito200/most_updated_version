@@ -1,5 +1,5 @@
 `timescale 1ns/10ps
-
+`define TARGET_KC705
 module rom_tech #(
     parameter int abits = 6,
     parameter int log2_dbytes = 3,

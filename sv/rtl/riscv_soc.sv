@@ -52,16 +52,16 @@ module riscv_soc #(
     output types_amba_pkg::mapinfo_type o_prci_pmapinfo,    // PRCI mapping information
     input types_amba_pkg::dev_config_type i_prci_pdevcfg,   // PRCI device descriptor
     output types_amba_pkg::apb_in_type o_prci_apbi,         // APB: PLL and Reset configuration interface
-    input types_amba_pkg::apb_out_type i_prci_apbo,         // APB: PLL and Reset configuration interface
+    input types_amba_pkg::apb_out_type i_prci_apbo          // APB: PLL and Reset configuration interface
     // DDR interfaces:
-    output types_amba_pkg::mapinfo_type o_ddr_pmapinfo,     // DDR configuration mapping information
-    input types_amba_pkg::dev_config_type i_ddr_pdevcfg,    // DDR configuration device descriptor
-    output types_amba_pkg::apb_in_type o_ddr_apbi,          // APB: DDR configuration interface
-    input types_amba_pkg::apb_out_type i_ddr_apbo,          // APB: DDR configuration interface
-    output types_amba_pkg::mapinfo_type o_ddr_xmapinfo,     // DDR memory bank mapping information
-    input types_amba_pkg::dev_config_type i_ddr_xdevcfg,    // DDR memory bank descriptor
-    output types_amba_pkg::axi4_slave_in_type o_ddr_xslvi,  // AXI DDR memory interface
-    input types_amba_pkg::axi4_slave_out_type i_ddr_xslvo   // AXI DDR memory interface
+//    output types_amba_pkg::mapinfo_type o_ddr_pmapinfo,     // DDR configuration mapping information
+//    input types_amba_pkg::dev_config_type i_ddr_pdevcfg,    // DDR configuration device descriptor
+//    output types_amba_pkg::apb_in_type o_ddr_apbi,          // APB: DDR configuration interface
+//    input types_amba_pkg::apb_out_type i_ddr_apbo,          // APB: DDR configuration interface
+//    output types_amba_pkg::mapinfo_type o_ddr_xmapinfo,     // DDR memory bank mapping information
+//    input types_amba_pkg::dev_config_type i_ddr_xdevcfg,    // DDR memory bank descriptor
+//    output types_amba_pkg::axi4_slave_in_type o_ddr_xslvi,  // AXI DDR memory interface
+//    input types_amba_pkg::axi4_slave_out_type i_ddr_xslvo   // AXI DDR memory interface
 );
 
 import config_target_pkg::*;
@@ -220,16 +220,16 @@ plic #(
 );
 
 
-cdc_axi_sync_tech u_cdc_ddr0 (
-    .i_xslv_clk(i_sys_clk),
-    .i_xslv_nrst(i_sys_nrst),
-    .i_xslvi(axisi[CFG_BUS0_XSLV_DDR]),
-    .o_xslvo(axiso[CFG_BUS0_XSLV_DDR]),
-    .i_xmst_clk(i_ddr_clk),
-    .i_xmst_nrst(i_ddr_nrst),
-    .o_xmsto(o_ddr_xslvi),
-    .i_xmsti(i_ddr_xslvo)
-);
+//cdc_axi_sync_tech u_cdc_ddr0 (
+//    .i_xslv_clk(i_sys_clk),
+//    .i_xslv_nrst(i_sys_nrst),
+//    .i_xslvi(axisi[CFG_BUS0_XSLV_DDR]),
+//    .o_xslvo(axiso[CFG_BUS0_XSLV_DDR]),
+//    .i_xmst_clk(i_ddr_clk),
+//    .i_xmst_nrst(i_ddr_nrst),
+//    .o_xmsto(o_ddr_xslvi),
+//    .i_xmsti(i_ddr_xslvo)
+//);
 
 
 apb_uart #(
@@ -347,12 +347,12 @@ begin: comb_proc
     dev_pnp[SOC_PNP_PRCI] = i_prci_pdevcfg;
 
     // DDR:
-    o_ddr_xmapinfo = bus0_mapinfo[CFG_BUS0_XSLV_DDR];
-    dev_pnp[SOC_PNP_DDR_AXI] = i_ddr_xdevcfg;
-    o_ddr_pmapinfo = bus1_mapinfo[CFG_BUS1_PSLV_DDR];
-    dev_pnp[SOC_PNP_DDR_APB] = i_ddr_pdevcfg;
-    o_ddr_apbi = apbi[CFG_BUS1_PSLV_DDR];
-    apbo[CFG_BUS1_PSLV_DDR] = i_ddr_apbo;
+//    o_ddr_xmapinfo = bus0_mapinfo[CFG_BUS0_XSLV_DDR];
+//    dev_pnp[SOC_PNP_DDR_AXI] = i_ddr_xdevcfg;
+//    o_ddr_pmapinfo = bus1_mapinfo[CFG_BUS1_PSLV_DDR];
+//    dev_pnp[SOC_PNP_DDR_APB] = i_ddr_pdevcfg;
+//    o_ddr_apbi = apbi[CFG_BUS1_PSLV_DDR];
+//    apbo[CFG_BUS1_PSLV_DDR] = i_ddr_apbo;
 end: comb_proc
 
 endmodule: riscv_soc

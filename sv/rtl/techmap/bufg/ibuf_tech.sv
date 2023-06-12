@@ -2,7 +2,7 @@
 //! @author     Sergey Khabarov
 //! @brief      Virtual simple input buffer.
 //----------------------------------------------------------------------------
-
+`define TARGET_KC705
 module ibuf_tech(
     output logic o,
     input i

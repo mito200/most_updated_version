@@ -1,5 +1,5 @@
 `timescale 1ns/10ps
-
+`define TARGET_KC705
 module ram_tech
 #(
     parameter abits = 12,

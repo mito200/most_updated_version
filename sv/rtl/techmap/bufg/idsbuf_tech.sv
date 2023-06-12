@@ -2,7 +2,7 @@
 //! @author     Sergey Khabarov
 //! @brief      Virtual input buffer with the differential signals.
 //--------------------------------------------------------------------------
-
+`define TARGET_KC705
 module idsbuf_tech (
     input clk_p,
     input clk_n,

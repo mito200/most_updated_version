@@ -2,7 +2,7 @@
 //! @author     Sergey Khabarov
 //! @brief      Virtual IO buffer.
 //--------------------------------------------------------------------------
-
+`define TARGET_KC705
 module iobuf_tech (
 
     output logic o,

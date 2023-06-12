@@ -45,24 +45,24 @@ module kc705_top #(
     output logic o_spi_mosi,
     input logic i_spi_miso,
     input logic i_sd_detected,                              // SD-card detected
-    input logic i_sd_protect,                                // SD-card write protect
+    input logic i_sd_protect                                // SD-card write protect
     // DDR3 signals:
-    output o_ddr3_reset_n,
-    output [0:0] o_ddr3_ck_n,
-    output [0:0] o_ddr3_ck_p,
-    output [0:0] o_ddr3_cke,
-    output [0:0] o_ddr3_cs_n,
-    output o_ddr3_ras_n,
-    output o_ddr3_cas_n,
-    output o_ddr3_we_n,
-    output [7:0] o_ddr3_dm,
-    output [2:0] o_ddr3_ba,
-    output [13:0] o_ddr3_addr,
-    inout [63:0] io_ddr3_dq,
-    inout [7:0] io_ddr3_dqs_n,
-    inout [7:0] io_ddr3_dqs_p,
-    output [0:0] o_ddr3_odt,
-    output o_ddr3_init_calib_complete
+//    output o_ddr3_reset_n,
+//    output [0:0] o_ddr3_ck_n,
+//    output [0:0] o_ddr3_ck_p,
+//    output [0:0] o_ddr3_cke,
+//    output [0:0] o_ddr3_cs_n,
+//    output o_ddr3_ras_n,
+//    output o_ddr3_cas_n,
+//    output o_ddr3_we_n,
+//    output [7:0] o_ddr3_dm,
+//    output [2:0] o_ddr3_ba,
+//    output [13:0] o_ddr3_addr,
+//    inout [63:0] io_ddr3_dq,
+//    inout [7:0] io_ddr3_dqs_n,
+//    inout [7:0] io_ddr3_dqs_p,
+//    output [0:0] o_ddr3_odt,
+//    output o_ddr3_init_calib_complete
 );
 
   import types_amba_pkg::*;
@@ -101,19 +101,19 @@ module kc705_top #(
   logic             w_pll_lock;
 
   // DDR interface
-  mapinfo_type ddr_xmapinfo;
-  dev_config_type ddr_xdev_cfg;
-  axi4_slave_out_type ddr_xslvo;
-  axi4_slave_in_type ddr_xslvi;
+//  mapinfo_type ddr_xmapinfo;
+//  dev_config_type ddr_xdev_cfg;
+//  axi4_slave_out_type ddr_xslvo;
+//  axi4_slave_in_type ddr_xslvi;
 
-  mapinfo_type ddr_pmapinfo;
-  dev_config_type ddr_pdev_cfg;
-  apb_in_type ddr_apbi;
-  apb_out_type ddr_apbo;
+//  mapinfo_type ddr_pmapinfo;
+//  dev_config_type ddr_pdev_cfg;
+//  apb_in_type ddr_apbi;
+//  apb_out_type ddr_apbo;
 
-  logic w_ddr_ui_nrst;
-  logic w_ddr_ui_clk;
-  logic w_ddr3_init_calib_complete;
+//  logic w_ddr_ui_nrst;
+//  logic w_ddr_ui_clk;
+//  logic w_ddr3_init_calib_complete;
 
   // PRCI intefrace:
   mapinfo_type prci_pmapinfo;
@@ -216,59 +216,59 @@ module kc705_top #(
     .o_prci_pmapinfo(prci_pmapinfo),
     .i_prci_pdevcfg(prci_dev_cfg),
     .o_prci_apbi(prci_apbi),
-    .i_prci_apbo(prci_apbo),
+    .i_prci_apbo(prci_apbo)
     // DDR:
-    .o_ddr_pmapinfo(ddr_pmapinfo),
-    .i_ddr_pdevcfg(ddr_pdev_cfg),
-    .o_ddr_apbi(ddr_apbi),
-    .i_ddr_apbo(ddr_apbo),
-    .o_ddr_xmapinfo(ddr_xmapinfo),
-    .i_ddr_xdevcfg(ddr_xdev_cfg),
-    .o_ddr_xslvi(ddr_xslvi),
-    .i_ddr_xslvo(ddr_xslvo)
+//    .o_ddr_pmapinfo(ddr_pmapinfo),
+//    .i_ddr_pdevcfg(ddr_pdev_cfg),
+//    .o_ddr_apbi(ddr_apbi),
+//    .i_ddr_apbo(ddr_apbo),
+//    .o_ddr_xmapinfo(ddr_xmapinfo),
+//    .i_ddr_xdevcfg(ddr_xdev_cfg),
+//    .o_ddr_xslvi(ddr_xslvi),
+//    .i_ddr_xslvo(ddr_xslvo)
   );
 
-ddr_tech #(
-    .async_reset(CFG_ASYNC_RESET),
-    .SYSCLK_TYPE(SYSCLK_TYPE), // "NO_BUFFER,"DIFFERENTIAL"
-    .SIM_BYPASS_INIT_CAL(SIM_BYPASS_INIT_CAL),  // "FAST"-for simulation true; "OFF"
-    .SIMULATION(SIMULATION)
-) ddr0 (
-     // AXI memory access (ddr clock)
-    .i_xslv_nrst(w_sys_nrst),
-    .i_xslv_clk(ib_clk_tcxo),
-    .i_xmapinfo(ddr_xmapinfo),
-    .o_xcfg(ddr_xdev_cfg),
-    .i_xslvi(ddr_xslvi),
-    .o_xslvo(ddr_xslvo),
-    // APB control interface (sys clock):
-    .i_apb_nrst(w_sys_nrst),
-    .i_apb_clk(w_sys_clk),
-    .i_pmapinfo(ddr_pmapinfo),
-    .o_pcfg(ddr_pdev_cfg),
-    .i_apbi(ddr_apbi),
-    .o_apbo(ddr_apbo),
-    // to SOC:
-    .o_ui_nrst(w_ddr_ui_nrst),  // xilinx generte ddr clock inside ddr controller
-    .o_ui_clk(w_ddr_ui_clk),  // xilinx generte ddr clock inside ddr controller
-    // DDR signals:
-    .io_ddr3_dq(io_ddr3_dq),
-    .io_ddr3_dqs_n(io_ddr3_dqs_n),
-    .io_ddr3_dqs_p(io_ddr3_dqs_p),
-    .o_ddr3_addr(o_ddr3_addr),
-    .o_ddr3_ba(o_ddr3_ba),
-    .o_ddr3_ras_n(o_ddr3_ras_n),
-    .o_ddr3_cas_n(o_ddr3_cas_n),
-    .o_ddr3_we_n(o_ddr3_we_n),
-    .o_ddr3_reset_n(o_ddr3_reset_n),
-    .o_ddr3_ck_p(o_ddr3_ck_p),
-    .o_ddr3_ck_n(o_ddr3_ck_n),
-    .o_ddr3_cke(o_ddr3_cke),
-    .o_ddr3_cs_n(o_ddr3_cs_n),
-    .o_ddr3_dm(o_ddr3_dm),
-    .o_ddr3_odt(o_ddr3_odt),
-    .o_init_calib_done(w_ddr3_init_calib_complete)
-);
+//ddr_tech #(
+//    .async_reset(CFG_ASYNC_RESET),
+//    .SYSCLK_TYPE(SYSCLK_TYPE), // "NO_BUFFER,"DIFFERENTIAL"
+//    .SIM_BYPASS_INIT_CAL(SIM_BYPASS_INIT_CAL),  // "FAST"-for simulation true; "OFF"
+//    .SIMULATION(SIMULATION)
+//) ddr0 (
+//     // AXI memory access (ddr clock)
+//    .i_xslv_nrst(w_sys_nrst),
+//    .i_xslv_clk(ib_clk_tcxo),
+//    .i_xmapinfo(ddr_xmapinfo),
+//    .o_xcfg(ddr_xdev_cfg),
+//    .i_xslvi(ddr_xslvi),
+//    .o_xslvo(ddr_xslvo),
+//    // APB control interface (sys clock):
+//    .i_apb_nrst(w_sys_nrst),
+//    .i_apb_clk(w_sys_clk),
+//    .i_pmapinfo(ddr_pmapinfo),
+//    .o_pcfg(ddr_pdev_cfg),
+//    .i_apbi(ddr_apbi),
+//    .o_apbo(ddr_apbo),
+//    // to SOC:
+//    .o_ui_nrst(w_ddr_ui_nrst),  // xilinx generte ddr clock inside ddr controller
+//    .o_ui_clk(w_ddr_ui_clk),  // xilinx generte ddr clock inside ddr controller
+//    // DDR signals:
+//    .io_ddr3_dq(io_ddr3_dq),
+//    .io_ddr3_dqs_n(io_ddr3_dqs_n),
+//    .io_ddr3_dqs_p(io_ddr3_dqs_p),
+//    .o_ddr3_addr(o_ddr3_addr),
+//    .o_ddr3_ba(o_ddr3_ba),
+//    .o_ddr3_ras_n(o_ddr3_ras_n),
+//    .o_ddr3_cas_n(o_ddr3_cas_n),
+//    .o_ddr3_we_n(o_ddr3_we_n),
+//    .o_ddr3_reset_n(o_ddr3_reset_n),
+//    .o_ddr3_ck_p(o_ddr3_ck_p),
+//    .o_ddr3_ck_n(o_ddr3_ck_n),
+//    .o_ddr3_cke(o_ddr3_cke),
+//    .o_ddr3_cs_n(o_ddr3_cs_n),
+//    .o_ddr3_dm(o_ddr3_dm),
+//    .o_ddr3_odt(o_ddr3_odt),
+//    .o_init_calib_done(w_ddr3_init_calib_complete)
+//);
 
   
 endmodule

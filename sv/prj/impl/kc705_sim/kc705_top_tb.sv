@@ -152,24 +152,24 @@ module kc705_top_tb;
     .o_spi_mosi(o_spi_mosi),
     .i_spi_miso(i_spi_miso),
     .i_sd_detected(i_sd_detected),
-    .i_sd_protect(i_sd_protect),
+    .i_sd_protect(i_sd_protect)
     // DDR signals:
-    .o_ddr3_reset_n(o_ddr3_reset_n),
-    .o_ddr3_ck_n(o_ddr3_ck_n),
-    .o_ddr3_ck_p(o_ddr3_ck_p),
-    .o_ddr3_cke(o_ddr3_cke),
-    .o_ddr3_cs_n(o_ddr3_cs_n),
-    .o_ddr3_ras_n(o_ddr3_ras_n),
-    .o_ddr3_cas_n(o_ddr3_cas_n),
-    .o_ddr3_we_n(o_ddr3_we_n),
-    .o_ddr3_dm(o_ddr3_dm),
-    .o_ddr3_ba(o_ddr3_ba),
-    .o_ddr3_addr(o_ddr3_addr),
-    .io_ddr3_dq(io_ddr3_dq),
-    .io_ddr3_dqs_p(io_ddr3_dqs_p),
-    .io_ddr3_dqs_n(io_ddr3_dqs_n),
-    .o_ddr3_odt(o_ddr3_odt),
-    .o_ddr3_init_calib_complete(o_ddr3_init_calib_complete)
+//    .o_ddr3_reset_n(o_ddr3_reset_n),
+//    .o_ddr3_ck_n(o_ddr3_ck_n),
+//    .o_ddr3_ck_p(o_ddr3_ck_p),
+//    .o_ddr3_cke(o_ddr3_cke),
+//    .o_ddr3_cs_n(o_ddr3_cs_n),
+//    .o_ddr3_ras_n(o_ddr3_ras_n),
+//    .o_ddr3_cas_n(o_ddr3_cas_n),
+//    .o_ddr3_we_n(o_ddr3_we_n),
+//    .o_ddr3_dm(o_ddr3_dm),
+//    .o_ddr3_ba(o_ddr3_ba),
+//    .o_ddr3_addr(o_ddr3_addr),
+//    .io_ddr3_dq(io_ddr3_dq),
+//    .io_ddr3_dqs_p(io_ddr3_dqs_p),
+//    .io_ddr3_dqs_n(io_ddr3_dqs_n),
+//    .o_ddr3_odt(o_ddr3_odt),
+//    .o_ddr3_init_calib_complete(o_ddr3_init_calib_complete)
   );
 
   // Global signals for Xilinx unisim modules:
@@ -200,85 +200,85 @@ module kc705_top_tb;
   //===========================================================================
   // DDR3 env. simulation:
   //===========================================================================
-  genvar dqwd;
-  generate
-    for (dqwd = 1; dqwd < DDR3_DQ_WIDTH; dqwd = dqwd+1) begin : dq_delay
-      WireDelay # (
-        .Delay_g    (0.00),
-        .Delay_rd   (0.00),
-        .ERR_INSERT ("OFF")
-       ) u_delay_dq (
-        .A             (io_ddr3_dq[dqwd]),
-        .B             (wb_ddr3_dq_sdram[dqwd]),
-        .reset         (sys_rst_n),
-        .phy_init_done (o_ddr3_init_calib_complete)
-       );
-    end
-    WireDelay # (
-      .Delay_g    (0.00),
-      .Delay_rd   (0.00),
-      .ERR_INSERT ("OFF")
-    ) u_delay_dq_0 (
-      .A             (io_ddr3_dq[0]),
-      .B             (wb_ddr3_dq_sdram[0]),
-      .reset         (sys_rst_n),
-      .phy_init_done (o_ddr3_init_calib_complete)
-    );
-  endgenerate
+//  genvar dqwd;
+//  generate
+//    for (dqwd = 1; dqwd < DDR3_DQ_WIDTH; dqwd = dqwd+1) begin : dq_delay
+//      WireDelay # (
+//        .Delay_g    (0.00),
+//        .Delay_rd   (0.00),
+//        .ERR_INSERT ("OFF")
+//       ) u_delay_dq (
+//        .A             (io_ddr3_dq[dqwd]),
+//        .B             (wb_ddr3_dq_sdram[dqwd]),
+//        .reset         (sys_rst_n),
+//        .phy_init_done (o_ddr3_init_calib_complete)
+//       );
+//    end
+//    WireDelay # (
+//      .Delay_g    (0.00),
+//      .Delay_rd   (0.00),
+//      .ERR_INSERT ("OFF")
+//    ) u_delay_dq_0 (
+//      .A             (io_ddr3_dq[0]),
+//      .B             (wb_ddr3_dq_sdram[0]),
+//      .reset         (sys_rst_n),
+//      .phy_init_done (o_ddr3_init_calib_complete)
+//    );
+//  endgenerate
 
-  genvar dqswd;
-  generate
-    for (dqswd = 0; dqswd < DDR3_DQS_WIDTH; dqswd = dqswd+1) begin : dqs_delay
-      WireDelay # (
-        .Delay_g    (0.00),
-        .Delay_rd   (0.00),
-        .ERR_INSERT ("OFF")
-       ) u_delay_dqs_p (
-        .A             (io_ddr3_dqs_p[dqswd]),
-        .B             (wb_ddr3_dqs_p_sdram[dqswd]),
-        .reset         (sys_rst_n),
-        .phy_init_done (o_ddr3_init_calib_complete)
-       );
+//  genvar dqswd;
+//  generate
+//    for (dqswd = 0; dqswd < DDR3_DQS_WIDTH; dqswd = dqswd+1) begin : dqs_delay
+//      WireDelay # (
+//        .Delay_g    (0.00),
+//        .Delay_rd   (0.00),
+//        .ERR_INSERT ("OFF")
+//       ) u_delay_dqs_p (
+//        .A             (io_ddr3_dqs_p[dqswd]),
+//        .B             (wb_ddr3_dqs_p_sdram[dqswd]),
+//        .reset         (sys_rst_n),
+//        .phy_init_done (o_ddr3_init_calib_complete)
+//       );
 
-      WireDelay # (
-        .Delay_g    (0.00),
-        .Delay_rd   (0.00),
-        .ERR_INSERT ("OFF")
-      ) u_delay_dqs_n (
-        .A             (io_ddr3_dqs_n[dqswd]),
-        .B             (wb_ddr3_dqs_n_sdram[dqswd]),
-        .reset         (sys_rst_n),
-        .phy_init_done (o_ddr3_init_calib_complete)
-       );
-    end
-  endgenerate
+//      WireDelay # (
+//        .Delay_g    (0.00),
+//        .Delay_rd   (0.00),
+//        .ERR_INSERT ("OFF")
+//      ) u_delay_dqs_n (
+//        .A             (io_ddr3_dqs_n[dqswd]),
+//        .B             (wb_ddr3_dqs_n_sdram[dqswd]),
+//        .reset         (sys_rst_n),
+//        .phy_init_done (o_ddr3_init_calib_complete)
+//       );
+//    end
+//  endgenerate
 
-  genvar r,i;
-  generate
-    for (r = 0; r < DDR3_CS_WIDTH; r = r + 1) begin: mem_rnk
-      for (i = 0; i < DDR3_NUM_COMP; i = i + 1) begin: gen_mem
-        ddr3_model u_comp_ddr3
-          (
-           .rst_n   (o_ddr3_reset_n),
-           .ck      (o_ddr3_ck_p[(i*DDR3_MEMORY_WIDTH)/72]),
-           .ck_n    (o_ddr3_ck_n[(i*DDR3_MEMORY_WIDTH)/72]),
-           .cke     (o_ddr3_cke[((i*DDR3_MEMORY_WIDTH)/72)+(1*r)]),
-           .cs_n    (o_ddr3_cs_n[((i*DDR3_MEMORY_WIDTH)/72)+(1*r)]),
-           .ras_n   (o_ddr3_ras_n),
-           .cas_n   (o_ddr3_cas_n),
-           .we_n    (o_ddr3_we_n),
-           .dm_tdqs (o_ddr3_dm[i]),
-           .ba      (o_ddr3_ba), //[r]), // mirror_ca is disabled
-           .addr    (o_ddr3_addr), //[r]), // mirror_ca is disabled
-           .dq      (wb_ddr3_dq_sdram[DDR3_MEMORY_WIDTH*(i+1)-1:DDR3_MEMORY_WIDTH*(i)]),
-           .dqs     (wb_ddr3_dqs_p_sdram[i]),
-           .dqs_n   (wb_ddr3_dqs_n_sdram[i]),
-           .tdqs_n  (),
-           .odt     (o_ddr3_odt[((i*DDR3_MEMORY_WIDTH)/72)+(1*r)])
-           );
-      end
-    end
-  endgenerate
+//  genvar r,i;
+//  generate
+//    for (r = 0; r < DDR3_CS_WIDTH; r = r + 1) begin: mem_rnk
+//      for (i = 0; i < DDR3_NUM_COMP; i = i + 1) begin: gen_mem
+//        ddr3_model u_comp_ddr3
+//          (
+//           .rst_n   (o_ddr3_reset_n),
+//           .ck      (o_ddr3_ck_p[(i*DDR3_MEMORY_WIDTH)/72]),
+//           .ck_n    (o_ddr3_ck_n[(i*DDR3_MEMORY_WIDTH)/72]),
+//           .cke     (o_ddr3_cke[((i*DDR3_MEMORY_WIDTH)/72)+(1*r)]),
+//           .cs_n    (o_ddr3_cs_n[((i*DDR3_MEMORY_WIDTH)/72)+(1*r)]),
+//           .ras_n   (o_ddr3_ras_n),
+//           .cas_n   (o_ddr3_cas_n),
+//           .we_n    (o_ddr3_we_n),
+//           .dm_tdqs (o_ddr3_dm[i]),
+//           .ba      (o_ddr3_ba), //[r]), // mirror_ca is disabled
+//           .addr    (o_ddr3_addr), //[r]), // mirror_ca is disabled
+//           .dq      (wb_ddr3_dq_sdram[DDR3_MEMORY_WIDTH*(i+1)-1:DDR3_MEMORY_WIDTH*(i)]),
+//           .dqs     (wb_ddr3_dqs_p_sdram[i]),
+//           .dqs_n   (wb_ddr3_dqs_n_sdram[i]),
+//           .tdqs_n  (),
+//           .odt     (o_ddr3_odt[((i*DDR3_MEMORY_WIDTH)/72)+(1*r)])
+//           );
+//      end
+//    end
+//  endgenerate
 
 
   //tap_dpi #(
